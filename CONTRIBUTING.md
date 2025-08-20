@@ -1,6 +1,6 @@
-# Contributing to ShieldGate
+# Contributing to NeuralSheild
 
-First off, thank you for considering contributing to ShieldGate! 🎉 It's people like you that will help us build a safer internet for everyone.
+First off, thank you for considering contributing to NeuralShield! 🎉 It's people like you that will help us build a safer internet for everyone.
 
 Reading and following these guidelines will help us make the contribution process easy and effective for everyone involved. It also communicates that you respect the time of the developers managing and developing this open-source project.
 
@@ -21,11 +21,11 @@ Enhancement suggestions are also tracked as GitHub issues. Please provide the fo
 
 *   **Use a clear and descriptive title.**
 *   **Provide a detailed description of the proposed enhancement.**
-*   **Explain why this enhancement would be useful** to most ShieldGate users.
+*   **Explain why this enhancement would be useful** to most NeuralShield users.
 *   **List any other platforms or contexts** where this enhancement would be relevant.
 
 ### 🌍 Adding Support for New Platforms
-A key goal of ShieldGate is to be universally useful. If you want to help add detection for a new platform (e.g., WhatsApp, Signal, Twitter DMs), here's how:
+A key goal of NeuralShield is to be universally useful. If you want to help add detection for a new platform (e.g., WhatsApp, Signal, Twitter DMs), here's how:
 
 1.  **Open an Issue First:** Discuss the new platform. We need to ensure it aligns with our goals.
 2.  **Data is King:** The model is only as good as its data. Contribution of a **labeled dataset** (spam vs. ham messages) for that platform is the most critical step.
@@ -45,8 +45,8 @@ We welcome pull requests (PRs). Please follow this process:
 1.  **Fork the repo** and create your branch from `main`. Use a descriptive branch name (e.g., `fix-gui-crash`, `add-whatsapp-dataset`, `feature-new-preprocessor`).
 2.  **Set up the development environment.**
     ```bash
-    git clone https://github.com/your-username/shieldgate-repo.git
-    cd shieldgate-repo
+    git clone https://github.com/your-username/neuralshield-repo.git
+    cd neuralshield-repo
     # We recommend using a virtual environment
     python -m venv venv
     # On Linux/Mac:
@@ -79,10 +79,10 @@ Before submitting a PR, please test your changes:
 
 ## 📜 Code of Conduct
 
-This project and everyone participating in it is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to `[team.lead@email.com]`.
+By participating, you are expected to uphold this code. Please report unacceptable behavior to [Team Leader](https://t.me/GreatTitan).
 
 ## ❓ Questions?
 
-Feel free to open an issue with your question or contact the development team lead directly at `[team.lead@email.com]`.
+Feel free to open an issue with your question or contact the development team lead directly at [Team leader](https://t.me/GreatTitan).
 
 Thank you for your contribution! 🙏
