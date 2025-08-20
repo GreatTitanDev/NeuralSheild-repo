@@ -37,6 +37,7 @@ This repository contains the core spam detection module and the desktop GUI appl
 
 ```
 # Future implementations
+
 NeuralShield-repo/
 │
 ├── core_detector/          # The core ML model and processing logic
@@ -113,7 +114,7 @@ Please read our `CONTRIBUTING.md` for guidelines on submitting pull requests.
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 ## 📞 Contact
 
