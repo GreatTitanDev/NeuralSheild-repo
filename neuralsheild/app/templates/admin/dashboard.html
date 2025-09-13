@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+        <p>Manage your NeuralShield instance</p>
+    </div>
+    
+    <div class="admin-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ total_users }}</h3>
+                <p>Total Users</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ total_analyses }}</h3>
+                <p>Total Analyses</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-comments"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ total_contacts }}</h3>
+                <p>Contact Messages</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-info">
+                <h3>{{ user_growth }}</h3>
+                <p>New Users (7 days)</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="admin-content">
+        <div class="admin-card">
+            <h2><i class="fas fa-history"></i> Recent Analyses</h2>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Platform</th>
+                            <th>Prediction</th>
+                            <th>Confidence</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for analysis in recent_analyses %}
+                        <tr>
+                            <td>{{ analysis.user.username if analysis.user else 'Guest' }}</td>
+                            <td><span class="badge badge-info">{{ analysis.platform }}</span></td>
+                            <td>
+                                <span class="badge {% if analysis.prediction == 'spam' %}badge-danger{% else %}badge-success{% endif %}">
+                                    {{ analysis.prediction }}
+                                </span>
+                            </td>
+                            <td>{{ (analysis.confidence * 100)|round }}%</td>
+                            <td>{{ analysis.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="admin-card-actions">
+                <a href="{{ url_for('admin.analyses') }}" class="view-all-btn">View All Analyses</a>
+            </div>
+        </div>
+        
+        <div class="admin-grid">
+            <div class="admin-card">
+                <h2><i class="fas fa-robot"></i> Model Management</h2>
+                <div class="model-status">
+                    <p>Current Status: <span class="badge badge-success">Operational</span></p>
+                    <p>Training Accuracy: {{ (training_logs[0].accuracy * 100)|round if training_logs and training_logs[0].accuracy else 'N/A' }}%</p>
+                </div>
+                <button id="trainModelBtn" class="primary-btn">
+                    <i class="fas fa-cogs"></i> Train Model
+                </button>
+                <div class="model-actions">
+                    <a href="{{ url_for('admin.model_management') }}" class="secondary-btn">View Training History</a>
+                </div>
+            </div>
+            
+            <div class="admin-card">
+                <h2><i class="fas fa-chart-pie"></i> Platform Distribution</h2>
+                <div class="platform-stats">
+                    {% for platform, count in platform_stats %}
+                    <div class="platform-stat">
+                        <span class="platform-name">{{ platform }}</span>
+                        <span class="platform-count">{{ count }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

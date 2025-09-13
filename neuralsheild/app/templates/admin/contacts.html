@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-envelope"></i> Contact Messages</h1>
+        <p>Manage all contact form submissions</p>
+    </div>
+    
+    <div class="admin-content">
+        <div class="admin-card">
+            <h2><i class="fas fa-inbox"></i> All Messages</h2>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>{{ contact.id }}</td>
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.subject }}</td>
+                            <td>
+                                <span class="badge {% if contact.is_read %}badge-info{% else %}badge-warning{% endif %}">
+                                    {{ 'Read' if contact.is_read else 'Unread' }}
+                                </span>
+                            </td>
+                            <td>{{ contact.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>
+                                {% if not contact.is_read %}
+                                <button class="icon-btn mark-read" data-contact-id="{{ contact.id }}" title="Mark as Read">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                {% endif %}
+                                <button class="icon-btn" title="View Message">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="icon-btn danger" title="Delete Message">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

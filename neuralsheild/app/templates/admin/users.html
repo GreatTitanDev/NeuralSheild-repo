@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-users"></i> User Management</h1>
+        <p>Manage all users in the system</p>
+    </div>
+    
+    <div class="admin-content">
+        <div class="admin-card">
+            <h2><i class="fas fa-user-friends"></i> All Users</h2>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <span class="badge {% if user.is_admin %}badge-primary{% else %}badge-info{% endif %}">
+                                    {{ 'Admin' if user.is_admin else 'User' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge {% if user.is_active %}badge-success{% else %}badge-danger{% endif %}">
+                                    {{ 'Active' if user.is_active else 'Inactive' }}
+                                </span>
+                            </td>
+                            <td>{{ user.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>
+                                <button class="icon-btn toggle-user" data-user-id="{{ user.id }}" title="{{ 'Deactivate' if user.is_active else 'Activate' }} User">
+                                    <i class="fas {{ 'fa-user-times' if user.is_active else 'fa-user-check' }}"></i>
+                                </button>
+                                {% if not user.is_admin %}
+                                <button class="icon-btn danger" title="Delete User">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

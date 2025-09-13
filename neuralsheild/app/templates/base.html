@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NeuralShield | AI-Powered Spam Protection{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" sizes="256x256" href="{{ url_for('static', filename='icon.png') }}" type="image/png">
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div class="cyber-gradient"></div>
+    <div class="cyber-grid"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="{{ url_for('main.home') }}">
+                    <i class="fas fa-shield-alt"></i>
+                    NEURALSHIELD <span>AI-Powered Spam Protection</span>
+                </a>
+            </div>
+            <!-- In base.html, update the navigation section -->
+            <nav>
+                 <ul>
+                    <li><a href="{{ url_for('main.home') }}" {% if request.path == '/' %}class="active"{% endif %}>Home</a></li>
+                    <li><a href="{{ url_for('main.about') }}" {% if request.path == '/about' %}class="active"{% endif %}>About</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('main.api_docs') }}" {% if request.path == '/api' %}class="active"{% endif %}>API</a></li>
+                    {% if current_user.is_admin %}
+                    <li class="admin-menu">
+                    <a href="{{ url_for('admin.dashboard') }}" {% if request.path.startswith('/admin') %}class="active"{% endif %}>
+                        <i class="fas fa-cog"></i> Admin
+                    </a>
+                    <div class="admin-dropdown">
+                        <a href="{{ url_for('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="{{ url_for('admin.users') }}"><i class="fas fa-users"></i> Users</a>
+                        <a href="{{ url_for('admin.analyses') }}"><i class="fas fa-chart-bar"></i> Analyses</a>
+                        <a href="{{ url_for('admin.contacts') }}"><i class="fas fa-envelope"></i> Messages</a>
+                        <a href="{{ url_for('admin.model_management') }}"><i class="fas fa-robot"></i> Model</a>
+                    </div>
+                </li>
+            {% endif %}
+        {% endif %}
+        <li><a href="{{ url_for('main.contact') }}" {% if request.path == '/contact' %}class="active"{% endif %}>Contact</a></li>
+    </ul>
+</nav>
+            </nav>
+            <div class="auth-buttons">
+                {% if current_user.is_authenticated %}
+                    <div class="user-menu">
+                        <button class="user-btn">
+                            <i class="fas fa-user-circle"></i> {{ current_user.username }}
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="{{ url_for('main.api_docs') }}"><i class="fas fa-key"></i> API Keys</a>
+                            <a href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}" class="auth-btn">Login</a>
+                    <a href="{{ url_for('auth.signup') }}" class="auth-btn primary">Sign Up</a>
+                {% endif %}
+            </div>
+        </header>
+        
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="alerts-container">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <span class="alert-close" onclick="this.parentElement.style.display='none'">&times;</span>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeuralShield</h3>
+                    <p>Advanced AI-powered protection against spam and phishing attacks across multiple platforms.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                        <li><a href="{{ url_for('main.about') }}">About</a></li>
+                        <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+                        <li><a href="{{ url_for('main.api_docs') }}">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NeuralShield. All rights reserved. Protecting your digital communication.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

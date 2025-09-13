@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="landing-container">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Defend Against <span class="cyber-text">Spam & Phishing</span> with AI</h1>
+            <p class="hero-subtitle">NeuralShield uses advanced machine learning to protect your communications across email, SMS, and social media platforms.</p>
+            <div class="hero-actions">
+                <a href="{{ url_for('auth.signup') }}" class="cta-button primary">Get Started Free</a>
+                <a href="{{ url_for('main.about') }}" class="cta-button secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="cyber-visual">
+                <div class="visual-element shield">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="visual-element message safe">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="visual-element message spam">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="visual-element ai">
+                    <i class="fas fa-brain"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">Why Choose NeuralShield?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI-Powered Detection</h3>
+                <p>Advanced machine learning algorithms detect even the most sophisticated spam and phishing attempts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Multi-Platform Support</h3>
+                <p>Protection for email, SMS, Instagram, Telegram, and more from a single platform.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Real-Time Analysis</h3>
+                <p>Instant scanning and classification of messages as they arrive in your inbox.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Detailed Analytics</h3>
+                <p>Comprehensive reports and insights into spam patterns and threats.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Developer API</h3>
+                <p>Integrate NeuralShield's detection capabilities into your own applications.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-virus"></i>
+                </div>
+                <h3>Continuous Learning</h3>
+                <p>Our system constantly evolves to recognize new spam techniques and threats.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat">
+                <h3 class="stat-number">99.7%</h3>
+                <p class="stat-label">Accuracy Rate</p>
+            </div>
+            <div class="stat">
+                <h3 class="stat-number">10M+</h3>
+                <p class="stat-label">Messages Analyzed</p>
+            </div>
+            <div class="stat">
+                <h3 class="stat-number">24/7</h3>
+                <p class="stat-label">Protection</p>
+            </div>
+            <div class="stat">
+                <h3 class="stat-number">100ms</h3>
+                <p class="stat-label">Average Response Time</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Secure Your Communications?</h2>
+        <p>Join thousands of users and organizations protected by NeuralShield's advanced AI technology.</p>
+        <div class="cta-buttons">
+            <a href="{{ url_for('auth.signup') }}" class="cta-button primary large">Get Started Now</a>
+            <a href="{{ url_for('main.contact') }}" class="cta-button secondary large">Contact Sales</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

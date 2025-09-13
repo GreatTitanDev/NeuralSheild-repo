@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-robot"></i> Model Management</h1>
+        <p>Manage and train the spam detection model</p>
+    </div>
+    
+    <div class="admin-content">
+        <div class="admin-grid">
+            <div class="admin-card">
+                <h2><i class="fas fa-cogs"></i> Model Training</h2>
+                <div class="model-info">
+                    <p>Current Status: <span class="badge badge-success">Operational</span></p>
+                    <p>Training Samples: {{ training_logs[0].training_samples if training_logs and training_logs[0].training_samples else 'N/A' }}</p>
+                </div>
+                <button id="trainModelBtn" class="primary-btn">
+                    <i class="fas fa-cogs"></i> Train Model
+                </button>
+                <div class="training-options">
+                    <h3>Training Options</h3>
+                    <div class="form-group">
+                        <label for="epochs">Training Epochs</label>
+                        <input type="number" id="epochs" name="epochs" value="10" min="1" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="augment" name="augment" checked>
+                            <span class="checkmark"></span>
+                            Use Data Augmentation
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-card">
+                <h2><i class="fas fa-history"></i> Training History</h2>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Accuracy</th>
+                                <th>Status</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log in training_logs %}
+                            <tr>
+                                <td>{{ log.training_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    {% if log.accuracy %}
+                                        {{ (log.accuracy * 100)|round }}%
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="badge {% if log.status == 'success' %}badge-success{% elif log.status == 'failed' %}badge-danger{% else %}badge-warning{% endif %}">
+                                        {{ log.status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if log.duration %}
+                                        {{ log.duration }}s
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button class="icon-btn" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-card">
+            <h2><i class="fas fa-chart-line"></i> Performance Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Accuracy</h3>
+                    <div class="metric-value">
+                        {{ (training_logs[0].accuracy * 100)|round if training_logs and training_logs[0].accuracy else 'N/A' }}%
+                    </div>
+                    <div class="metric-trend up">
+                        <i class="fas fa-arrow-up"></i> 2.5%
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <h3>Precision</h3>
+                    <div class="metric-value">
+                        {{ (training_logs[0].precision * 100)|round if training_logs and training_logs[0].precision else 'N/A' }}%
+                    </div>
+                    <div class="metric-trend up">
+                        <i class="fas fa-arrow-up"></i> 1.8%
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <h3>Recall</h3>
+                    <div class="metric-value">
+                        {{ (training_logs[0].recall * 100)|round if training_logs and training_logs[0].recall else 'N/A' }}%
+                    </div>
+                    <div class="metric-trend down">
+                        <i class="fas fa-arrow-down"></i> 0.5%
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <h3>F1 Score</h3>
+                    <div class="metric-value">
+                        {{ (training_logs[0].f1_score * 100)|round if training_logs and training_logs[0].f1_score else 'N/A' }}%
+                    </div>
+                    <div class="metric-trend up">
+                        <i class="fas fa-arrow-up"></i> 1.2%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-chart-bar"></i> Analysis History</h1>
+        <p>View all spam analysis results</p>
+    </div>
+    
+    <div class="admin-content">
+        <div class="admin-card">
+            <h2><i class="fas fa-history"></i> All Analyses</h2>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Platform</th>
+                            <th>Prediction</th>
+                            <th>Confidence</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for analysis in analyses.items %}
+                        <tr>
+                            <td>{{ analysis.id }}</td>
+                            <td>{{ analysis.user.username if analysis.user else 'Guest' }}</td>
+                            <td><span class="badge badge-info">{{ analysis.platform }}</span></td>
+                            <td>
+                                <span class="badge {% if analysis.prediction == 'spam' %}badge-danger{% else %}badge-success{% endif %}">
+                                    {{ analysis.prediction }}
+                                </span>
+                            </td>
+                            <td>{{ (analysis.confidence * 100)|round }}%</td>
+                            <td>{{ analysis.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>
+                                <button class="icon-btn" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                {% if analyses.has_prev %}
+                    <a href="{{ url_for('admin.analyses', page=analyses.prev_num) }}" class="pagination-link">Previous</a>
+                {% endif %}
+                
+                {% for page_num in analyses.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                    {% if page_num %}
+                        <a href="{{ url_for('admin.analyses', page=page_num) }}" class="pagination-link {% if page_num == analyses.page %}active{% endif %}">
+                            {{ page_num }}
+                        </a>
+                    {% else %}
+                        <span class="pagination-ellipsis">...</span>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if analyses.has_next %}
+                    <a href="{{ url_for('admin.analyses', page=analyses.next_num) }}" class="pagination-link">Next</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

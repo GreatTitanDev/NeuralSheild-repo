@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Spam Detection Dashboard</h1>
+        <p>Analyze messages for spam across multiple platforms</p>
+    </div>
+    
+    <div class="main-content">
+        <section class="input-section">
+            <h2 class="section-title">
+                <i class="fas fa-envelope"></i>
+                MESSAGE CONTENT
+            </h2>
+            
+            <div class="platform-selector">
+                <div class="platform-label">SELECT PLATFORM:</div>
+                <div class="platform-options">
+                    <button class="platform-btn active" data-platform="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                    <button class="platform-btn" data-platform="sms">
+                        <i class="fas fa-sms"></i> SMS
+                    </button>
+                    <button class="platform-btn" data-platform="instagram">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <button class="platform-btn" data-platform="telegram">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </button>
+                </div>
+            </div>
+            
+            <textarea id="emailContent" placeholder="Paste the message content you want to analyze here..."></textarea>
+            <div class="button-group">
+                <button id="analyzeBtn" class="primary-btn pulse">
+                    <i class="fas fa-search"></i>
+                    ANALYZE
+                </button>
+                <button id="clearBtn" class="secondary-btn">
+                    <i class="fas fa-trash"></i>
+                    CLEAR
+                </button>
+                <button id="sampleBtn" class="secondary-btn">
+                    <i class="fas fa-star"></i>
+                    SAMPLE
+                </button>
+            </div>
+        </section>
+        
+        <section class="results-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-bar"></i>
+                ANALYSIS RESULTS
+            </h2>
+            <div class="result-display">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h3 class="result-title">STATUS: <span id="resultStatus">READY</span></h3>
+                        <div id="resultBadge" class="badge badge-info">WAITING</div>
+                    </div>
+                    <p>Submit a message to analyze its content for spam characteristics.</p>
+                </div>
+                
+                <div class="result-card" id="confidenceCard" style="display: none;">
+                    <h3 class="result-title">CONFIDENCE LEVEL</h3>
+                    <div class="confidence-meter">
+                        <div id="confidenceLevel" class="confidence-level" style="width: 0%"></div>
+                    </div>
+                    <div id="confidenceValue" class="confidence-value">0%</div>
+                </div>
+                
+                <div class="result-card" id="detailsCard" style="display: none;">
+                    <h3 class="result-title">DETAILED ANALYSIS</h3>
+                    <div class="details" id="analysisDetails">
+                        <!-- Details will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="history-section" id="historySection">
+        <h2 class="section-title">
+            <i class="fas fa-history"></i>
+            ANALYSIS HISTORY
+        </h2>
+        <div id="historyList">
+            <div class="detail-item"><div class="loading"></div> Loading history...</div>
+        </div>
+        <div id="pagination" class="pagination"></div>
+    </section>
+
+    <div id="alertContainer"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

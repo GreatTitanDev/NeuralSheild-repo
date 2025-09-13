@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2><i class="fas fa-user-plus"></i> Create Your Account</h2>
+            <p>Join NeuralShield to protect your communications from spam</p>
+        </div>
+        
+        <form method="POST" action="{{ url_for('auth.signup') }}" class="auth-form" id="signupForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" required>
+                    <div class="password-strength">
+                        <div class="strength-meter"></div>
+                    </div>
+                </div>
+                <div class="password-requirements">
+                    <p>Password must contain at least:</p>
+                    <ul>
+                        <li id="length-req">8 characters</li>
+                        <li id="uppercase-req">1 uppercase letter</li>
+                        <li id="lowercase-req">1 lowercase letter</li>
+                        <li id="number-req">1 number</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <div id="password-match" class="validation-message"></div>
+            </div>
+            
+            <div class="form-options">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <span class="checkmark"></span>
+                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+            </div>
+            
+            <button type="submit" class="auth-submit-btn">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/signup-validation.js') }}"></script>
+{% endblock %}

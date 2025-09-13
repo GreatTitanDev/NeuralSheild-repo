@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="api-container">
+    <div class="api-header">
+        <h1><i class="fas fa-code"></i> NeuralShield API</h1>
+        <p>Integrate our advanced spam detection into your applications</p>
+    </div>
+    
+    <div class="api-content">
+        <div class="api-key-section">
+            <h2>Your API Key</h2>
+            <div class="api-key-card">
+                <div class="api-key-display">
+                    <span id="apiKeyValue">{% if current_user.api_key %}{{ current_user.api_key }}{% else %}No API key generated yet{% endif %}</span>
+                    <button id="copyApiKeyBtn" class="icon-btn" title="Copy to clipboard" {% if not current_user.api_key %}disabled{% endif %}>
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <button id="generateApiKeyBtn" class="primary-btn">
+                    <i class="fas fa-key"></i> Generate New API Key
+                </button>
+                <div class="api-key-info">
+                    <p><i class="fas fa-info-circle"></i> Your API key is private. Do not share it or expose it in client-side code.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-docs-section">
+            <h2>API Documentation</h2>
+            
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-url">/api/detect</span>
+                </div>
+                <div class="endpoint-content">
+                    <p>Analyze a message for spam content.</p>
+                    
+                    <h3>Request Headers</h3>
+                    <div class="code-block">
+                        <pre><code>Content-Type: application/json
+X-API-Key: your_api_key_here</code></pre>
+                    </div>
+                    
+                    <h3>Request Body</h3>
+                    <div class="code-block">
+                        <pre><code>{
+  "text": "Your message content here",
+  "platform": "email" // Optional: email, sms, instagram, telegram
+}</code></pre>
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="code-block">
+                        <pre><code>{
+  "prediction": "spam|ham",
+  "probability": 0.95,
+  "explanation": "Detailed explanation...",
+  "analysis_id": "12345"
+}</code></pre>
+                    </div>
+                    
+                    <h3>Example using curl</h3>
+                    <div class="code-block">
+                        <pre><code>curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -d '{"text":"Win a free iPhone now!", "platform":"sms"}' \
+  https://your-domain.com/api/detect</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-url">/api/history</span>
+                </div>
+                <div class="endpoint-content">
+                    <p>Retrieve your analysis history.</p>
+                    
+                    <h3>Request Headers</h3>
+                    <div class="code-block">
+                        <pre><code>X-API-Key: your_api_key_here</code></pre>
+                    </div>
+                    
+                    <h3>Query Parameters</h3>
+                    <div class="code-block">
+                        <pre><code>?page=1&per_page=10</code></pre>
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="code-block">
+                        <pre><code>{
+  "history": [
+    {
+      "id": 123,
+      "content": "Message content...",
+      "platform": "email",
+      "prediction": "spam",
+      "confidence": 0.92,
+      "created_at": "2023-07-15T10:30:00Z"
+    }
+  ],
+  "total": 50,
+  "pages": 5,
+  "current_page": 1
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-libraries-section">
+            <h2>Client Libraries</h2>
+            
+            <div class="tabs">
+                <div class="tab-links">
+                    <button class="tab-link active" data-tab="python">Python</button>
+                    <button class="tab-link" data-tab="javascript">JavaScript</button>
+                    <button class="tab-link" data-tab="php">PHP</button>
+                </div>
+                
+                <div class="tab-content active" id="python-tab">
+                    <div class="code-block">
+                        <pre><code>import requests
+
+class NeuralShieldClient:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://your-domain.com/api"
+        
+    def detect_spam(self, text, platform="email"):
+        headers = {
+            "Content-Type": "application/json",
+            "X-API-Key": self.api_key
+        }
+        data = {
+            "text": text,
+            "platform": platform
+        }
+        response = requests.post(f"{self.base_url}/detect", 
+                               json=data, headers=headers)
+        return response.json()
+        
+# Usage
+client = NeuralShieldClient("your_api_key_here")
+result = client.detect_spam("Win a free iPhone!")
+print(result)</code></pre>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="javascript-tab">
+                    <div class="code-block">
+                        <pre><code>class NeuralShieldClient {
+    constructor(apiKey) {
+        this.apiKey = apiKey;
+        this.baseUrl = "https://your-domain.com/api";
+    }
+    
+    async detectSpam(text, platform = "email") {
+        const response = await fetch(`${this.baseUrl}/detect`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-Key': this.apiKey
+            },
+            body: JSON.stringify({ text, platform })
+        });
+        return await response.json();
+    }
+}
+
+// Usage
+const client = new NeuralShieldClient("your_api_key_here");
+client.detectSpam("Win a free iPhone!")
+    .then(result => console.log(result));</code></pre>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="php-tab">
+                    <div class="code-block">
+                        <pre><code>&lt;?php
+class NeuralShieldClient {
+    private $apiKey;
+    private $baseUrl = "https://your-domain.com/api";
+    
+    public function __construct($apiKey) {
+        $this->apiKey = $apiKey;
+    }
+    
+    public function detectSpam($text, $platform = "email") {
+        $url = $this->baseUrl . "/detect";
+        
+        $data = array(
+            "text" => $text,
+            "platform" => $platform
+        );
+        
+        $options = array(
+            'http' => array(
+                'header'  => "Content-Type: application/json\r\n" .
+                             "X-API-Key: " . $this->apiKey . "\r\n",
+                'method'  => 'POST',
+                'content' => json_encode($data)
+            )
+        );
+        
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        
+        return json_decode($result, true);
+    }
+}
+
+// Usage
+$client = new NeuralShieldClient("your_api_key_here");
+$result = $client->detectSpam("Win a free iPhone!");
+print_r($result);
+?&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+{% endblock %}
