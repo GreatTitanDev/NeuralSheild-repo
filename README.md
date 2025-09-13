@@ -53,7 +53,7 @@ NeuralShield-repo/
 | **Browser Extension** | 🔄 **Active Development** | Team Leader | Real-time protection for webmail and social media sites. |
 | **Public Website** | ✅ **Stable** | Team Leader | Landing page with documentation and demo. |
 
-## 🛠️ Installation & Usage (Desktop App)
+## 🛠️ Installation & Usage 
 
 ### Prerequisites
 *   Python 3.8 or higher
@@ -76,7 +76,7 @@ NeuralShield-repo/
     python run.py
     ```
 
-4.  **Use the app:** Paste text into the input box and click "Analyze" to get an instant spam classification.
+4.  **Use the web app:** Paste text into the input box and click "Analyze" to get an instant spam classification.
 
 ## 👥 Contributing
 
