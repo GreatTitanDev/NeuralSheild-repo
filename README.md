@@ -40,28 +40,7 @@ This repository contains the core spam detection module and the desktop GUI appl
 
 NeuralShield-repo/
 │
-├── core_detector/          # The core ML model and processing logic
-│   ├── __init__.py
-│   ├── predictor.py        # Loads model and makes predictions
-│   ├── preprocessor.py     # Cleans and prepares text data
-│   └── model/              # Serialized model vectorizer, and label encoder
-│       ├── model.pkl
-│       ├── vectorizer.pkl
-│       └── label_encoder.pkl
-│
-├── gui/                    # Source code for the Desktop application
-│   ├── __init__.py
-│   ├── main_window.py      # Primary GUI logic
-│   └── assets/             # Icons and images
-│
-├── training/               # Scripts for retraining the model (Jupyter Notebooks + data)
-│   ├── data_collection.ipynb
-│   ├── model_training.ipynb
-│   └── datasets/           # (Not included in repo due to size)
-│
-├── docs/                   # Documentation
-├── requirements.txt        # Python dependencies
-└── README.md              # This file
+
 ```
 
 ### 🚧 Development Roadmap
@@ -69,10 +48,10 @@ NeuralShield-repo/
 | Component | Status | Lead | Description |
 | :--- | :--- | :--- | :--- |
 | **Core Detection Module** | ✅ **Stable** | Team | The trained Logistic Regression model and processing code. |
-| **Desktop GUI Application** | ✅ **Stable** | Team Leader | Feature-complete standalone desktop app. |
-| **RESTful API** | 🔄 **Active Development** | Team Leader | A web service to allow integration with other apps. |
+| **Desktop GUI Application** | 🔄 **Active Development**  | Team Leader | Feature-complete standalone desktop app. |
+| **RESTful API** | ✅ **Stable** | Team Leader | A web service to allow integration with other apps. |
 | **Browser Extension** | 🔄 **Active Development** | Team Leader | Real-time protection for webmail and social media sites. |
-| **Public Website** | 🔄 **Active Development** | Team Leader | Landing page with documentation and demo. |
+| **Public Website** | ✅ **Stable** | Team Leader | Landing page with documentation and demo. |
 
 ## 🛠️ Installation & Usage (Desktop App)
 
@@ -94,8 +73,7 @@ NeuralShield-repo/
 
 3.  **Run the application:**
     ```bash
-    # future implementation
-    python -m gui.main_window
+    python run.py
     ```
 
 4.  **Use the app:** Paste text into the input box and click "Analyze" to get an instant spam classification.
