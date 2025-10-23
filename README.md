@@ -70,6 +70,10 @@ This repository contains the core spam detection module and the flask web app.
 
 4.  **Use the web app:** Paste text into the input box and click "Analyze" to get an instant spam classification.
 
+## Hosted web app on Render
+
+   (Neuralshield)[neuralahieldnew.onrender.com]
+
 ## 👥 Contributing
 
 We are building the future of spam protection and welcome contributions! Our focus is on expanding platform coverage and improving model accuracy.
