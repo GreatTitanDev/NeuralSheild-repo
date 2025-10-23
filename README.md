@@ -72,7 +72,7 @@ This repository contains the core spam detection module and the flask web app.
 
 ## Hosted web app on Render
 
-   [Neuralshield](neuralahieldnew.onrender.com)
+   [Neuralshield](https://neuralahieldnew.onrender.com)
 
 ## 👥 Contributing
 
