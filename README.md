@@ -33,15 +33,7 @@ We have developed a highly accurate **Logistic Regression model** that is traine
 
 ## 📦 Project Structure & Status
 
-This repository contains the core spam detection module and the desktop GUI application.
-
-```
-# Future implementations
-
-NeuralShield-repo/
-│
-
-```
+This repository contains the core spam detection module and the flask web app.
 
 ### 🚧 Development Roadmap
 
